@@ -10,6 +10,8 @@ var obteniendoData = function () {
     });
 };
 
+
+// comprobando si es que por el id se puede imprimir la respectiva info según url
 var agregarId = function (tema) {
 
   if (tema.id == 1) {

@@ -10,21 +10,11 @@ var cargarPagina = function () {
   $("#filtrado").submit(filtroBusqueda);
 };
 
-// var arregloTemas = [];
-
 var mostrarTemas = function () {
   $.getJSON(api.url, function (temas) {
     temas.forEach(colocarTemaEnTabla);
-    // temas.push(arregloTemas);
   });
 };
-
-// var plantilla =
-//   "<tr data-id=__id_tema__>"+
-//     "<td>__autor__</td>"+
-//     "<td>__tema__</td>"+
-//     "<td>__respuestas__</td>"+
-//   "</tr>";
 
 var colocarTemaEnTabla = function (tema) {
   var idTema = tema.id;
@@ -49,13 +39,6 @@ var colocarTemaEnTabla = function (tema) {
   $tr.append($tdRespuestas);
   $tablaLista.append($tr);
 
-  // console.log(respuestaNumero);
-  //
-  // var colocarEnPlantilla = plantilla.replace("__id_tema__", idTema).
-  // replace("__autor__", autor).replace("__tema__", tema).
-  // replace("__respuestas__", respuestaNumero);
-  //
-  // $tablaLista.append(colocarEnPlantilla);
 }
 
 var crearTema = function (e) {
@@ -77,18 +60,12 @@ var filtroBusqueda = function (e, temas) {
   var criterioFiltro = $("#criterio-filtro").val().toLowerCase();
   var temas = function () {
     $.getJSON(api.url, function (temas) {
-      // console.log(temas);
       var temaFiltrado = temas.filter(function (tema){
         console.log(tema.content.toLowerCase().indexOf(criterioFiltro)>=0);
-        // colocarTemaEnTabla(temaFiltrado);
       });
     });
   };
   temas();
-  // var temasFiltrados = arregloTemas.filter(function(tema){
-  //   return tema.content.toLowerCase().indexOf(criterioFiltro)>=0;
-  // });
-  // colocarTemaEnTabla(temasFiltrados);
 };
 
 $(document).ready(cargarPagina);
