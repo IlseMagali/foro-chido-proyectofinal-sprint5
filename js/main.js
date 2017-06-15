@@ -10,9 +10,12 @@ var cargarPagina = function () {
   $("#filtrado").submit(filtroBusqueda);
 };
 
+var arregloTemas = [];
+
 var mostrarTemas = function () {
   $.getJSON(api.url, function (temas) {
     temas.forEach(colocarTemaEnTabla);
+    temas.push(arregloTemas);
   });
 };
 
@@ -27,21 +30,23 @@ var colocarTemaEnTabla = function (tema) {
   var idTema = tema.id;
   var autor = tema.author_name;
   var tema = tema.content;
-  var respuesta = tema.responses_count;
-  var respuestaNumero = parseInt(respuesta);
+  // var respuesta = tema.responses_count;
+  // var respuestaNumero = parseInt(respuesta);
 
   var $tr = $("<tr />");
   var $tdAutor = $("<td />");
   var $tdTema = $("<td />");
   var $tdRespuestas = $("<td />");
+  var $linkTema = $("<a />");
 
   $tdAutor.text(autor);
-  $tdTema.text(tema);
-  $tdRespuestas.text(respuestaNumero);
+  $linkTema.text(tema);
+  // $tdRespuestas.text(respuestaNumero);
 
   $tr.append($tdAutor);
   $tr.append($tdTema);
-  $tr.append($tdRespuestas);
+  $tdTema.append($linkTema);
+  // $tr.append($tdRespuestas);
   $tablaLista.append($tr);
 
   // console.log(respuestaNumero);
@@ -80,7 +85,10 @@ var filtroBusqueda = function (e, temas) {
     });
   };
   temas();
-
+  // var temasFiltrados = arregloTemas.filter(function(tema){
+  //   return tema.content.toLowerCase().indexOf(criterioFiltro)>=0;
+  // });
+  // colocarTemaEnTabla(temasFiltrados);
 };
 
 $(document).ready(cargarPagina);
