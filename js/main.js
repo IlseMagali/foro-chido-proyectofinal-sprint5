@@ -7,6 +7,7 @@ var $tablaLista = $("#tabla-lista");
 var cargarPagina = function () {
   mostrarTemas();
   $("#forma-agregar-tema").submit(crearTema);
+  $("#filtrado").submit(filtroBusqueda);
 };
 
 var mostrarTemas = function () {
@@ -15,12 +16,12 @@ var mostrarTemas = function () {
   });
 };
 
-var plantilla =
-  "<tr data-id=__id_tema__>"+
-    "<td>__autor__</td>"+
-    "<td>__tema__</td>"+
-    "<td>__respuestas__</td>"+
-  "</tr>";
+// var plantilla =
+//   "<tr data-id=__id_tema__>"+
+//     "<td>__autor__</td>"+
+//     "<td>__tema__</td>"+
+//     "<td>__respuestas__</td>"+
+//   "</tr>";
 
 var colocarTemaEnTabla = function (tema) {
   var idTema = tema.id;
@@ -29,19 +30,57 @@ var colocarTemaEnTabla = function (tema) {
   var respuesta = tema.responses_count;
   var respuestaNumero = parseInt(respuesta);
 
-  console.log(respuestaNumero);
+  var $tr = $("<tr />");
+  var $tdAutor = $("<td />");
+  var $tdTema = $("<td />");
+  var $tdRespuestas = $("<td />");
 
-  var colocarEnPlantilla = plantilla.replace("__id_tema__", idTema).
-  replace("__autor__", autor).replace("__tema__", tema).
-  replace("__respuestas__", respuestaNumero);
+  $tdAutor.text(autor);
+  $tdTema.text(tema);
+  $tdRespuestas.text(respuestaNumero);
 
-  $tablaLista.append(colocarEnPlantilla);
+  $tr.append($tdAutor);
+  $tr.append($tdTema);
+  $tr.append($tdRespuestas);
+  $tablaLista.append($tr);
+
+  // console.log(respuestaNumero);
+  //
+  // var colocarEnPlantilla = plantilla.replace("__id_tema__", idTema).
+  // replace("__autor__", autor).replace("__tema__", tema).
+  // replace("__respuestas__", respuestaNumero);
+  //
+  // $tablaLista.append(colocarEnPlantilla);
 }
 
 var crearTema = function (e) {
   e.preventDefault();
-  console.log("hola");
+  var inputNombreAutor = $("#autor-tema").val();
+  var inputTituloTema = $("#titulo-tema").val();
+
+  $.post(api.url, {
+    author_name: inputNombreAutor,
+    content: inputTituloTema
+  }, function (tema) {
+    $("#forma-modal").modal("hide");
+    mostrarTemas();
+  });
 };
 
+var filtroBusqueda = function (e, temas) {
+  e.preventDefault();
+  var criterioFiltro = $("#criterio-filtro").val().toLowerCase();
+  var temas = function () {
+    $.getJSON(api.url, function (temas) {
+      // console.log(temas);
+      var temaFiltrado = temas.filter(function (tema){
+        console.log(tema.content.toLowerCase().indexOf(criterioFiltro)>=0);
+      });
+      // colocarTemaEnTabla(temaFiltrado);
+    });
+  };
+  temas();
+
+};
 
 $(document).ready(cargarPagina);

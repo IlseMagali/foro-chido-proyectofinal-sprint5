@@ -18,9 +18,9 @@
             </a>
           </div>
         </div>
-        <form class="navbar-form navbar-left" role="search">
+        <form id="filtrado" class="navbar-form navbar-left" role="search">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Filtrar por tema">
+            <input id="criterio-filtro" type="text" class="form-control" placeholder="Filtrar por tema">
           </div>
           <button id="boton-filtrar" type="submit" class="btn btn-default">Buscar</button>
         </form>
@@ -54,10 +54,9 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                  <label for="nombre-tema">Nombre tema:</label>
-                  <input type="text" class="form-control" id="nombre-tema" placeholder="Tema">
-
-                  <label for="autor-tema">Autor del tema:</label>
+                  <label for="nombre-tema">Título del tema:</label>
+                  <input type="text" class="form-control" id="titulo-tema" placeholder="Tema">
+                  <label for="autor-tema">Autor:</label>
                   <input type="text" class="form-control" id="autor-tema" placeholder="Nombre del autor">
                 </div>
             </div>
