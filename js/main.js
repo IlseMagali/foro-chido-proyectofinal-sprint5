@@ -6,6 +6,7 @@ var $tablaLista = $("#tabla-lista");
 
 var cargarPagina = function () {
   mostrarTemas();
+  $("#forma-agregar-tema").submit(crearTema);
 };
 
 var mostrarTemas = function () {
@@ -37,10 +38,10 @@ var colocarTemaEnTabla = function (tema) {
   $tablaLista.append(colocarEnPlantilla);
 }
 
-var crearTema = function () {
-  
-
-}
+var crearTema = function (e) {
+  e.preventDefault();
+  console.log("hola");
+};
 
 
 $(document).ready(cargarPagina);

@@ -23,8 +23,8 @@
             <input type="text" class="form-control" placeholder="Filtrar por tema">
           </div>
           <button id="boton-filtrar" type="submit" class="btn btn-default">Buscar</button>
-          <button id="boton-crear-tema" type="submit" class="btn btn-default btn-success">Crear tema</button>
         </form>
+        <button id="boton-crear-tema" type="button" class="btn btn-default btn-success" data-toggle="modal" data-target="#forma-modal">Crear tema</button>
       </nav>
     </header>
     <!-- Tabla de contenidos por tema  -->
@@ -40,9 +40,35 @@
         </tbody>
       </table>
     </section>
+    <!-- Termina Tabla de contenidos por tema  -->
 
-    <!-- Modal para crear tarea -->
-    
+
+    <!-- Modal para crear tema -->
+    <div class="modal fade" id="forma-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <form id="forma-agregar-tema" action="">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Nuevo tema</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                  <label for="nombre-tema">Nombre tema:</label>
+                  <input type="text" class="form-control" id="nombre-tema" placeholder="Tema">
+
+                  <label for="autor-tema">Autor del tema:</label>
+                  <input type="text" class="form-control" id="autor-tema" placeholder="Nombre del autor">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success">Agregar tema</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- termina modal para crear tema -->
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
