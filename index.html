@@ -1,0 +1,54 @@
+<!-- mostrar en este HTML los TOPICS de /topics -->
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Foro chido</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+  </head>
+  <body>
+    <!-- Navegador e input para filtrar temas -->
+    <header>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+              Foro Chido
+            </a>
+          </div>
+        </div>
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Filtrar por tema">
+          </div>
+          <button id="boton-filtrar" type="submit" class="btn btn-default">Buscar</button>
+          <button id="boton-crear-tema" type="submit" class="btn btn-default btn-success">Crear tema</button>
+        </form>
+      </nav>
+    </header>
+    <!-- Tabla de contenidos por tema  -->
+    <section class="container">
+      <table class="table">
+        <thead>
+          <th>Autor</th>
+          <th>Tema</th>
+          <th>Respuestas</th>
+        </thead>
+        <tbody id="tabla-lista">
+
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Modal para crear tarea -->
+    
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/main.js"></script>
+
+  </body>
+</html>
