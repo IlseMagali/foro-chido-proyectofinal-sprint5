@@ -6,22 +6,35 @@ var $tablaLista = $("#tabla-lista");
 
 var cargarPagina = function () {
   mostrarTemas();
+  cargarTemas();
   $("#forma-agregar-tema").submit(crearTema);
-  $("#filtrado").submit(filtroBusqueda);
+  $("#filtrado").keyup(filtroBusqueda);
 };
+
+var arregloDeTemas = [];
 
 var mostrarTemas = function () {
   $.getJSON(api.url, function (temas) {
-    temas.forEach(colocarTemaEnTabla);
+    temas.forEach(function (tema){
+      arregloDeTemas.push(tema);
+    });
+  });
+};
+
+var cargarTemas = function () {
+  $.getJSON(api.url, function (tema){
+    tema.forEach(colocarTemaEnTabla);
   });
 };
 
 var colocarTemaEnTabla = function (tema) {
   var idTema = tema.id;
   var autor = tema.author_name;
-  var tema = tema.content;
+  var temaContenido = tema.content;
   var respuesta = tema.responses_count;
-  var respuestaNumero = parseInt(respuesta);
+  // console.log(tema);
+  //console.log(respuesta);
+  // var respuestaNumero = parseInt(respuesta);
 
   var $tr = $("<tr />");
   var $tdAutor = $("<td />");
@@ -30,8 +43,8 @@ var colocarTemaEnTabla = function (tema) {
   var $linkTema = $("<a />");
 
   $tdAutor.text(autor);
-  $linkTema.text(tema);
-  $tdRespuestas.text(respuestaNumero);
+  $linkTema.text(temaContenido);
+  $tdRespuestas.text(respuesta);
 
   $tr.append($tdAutor);
   $tr.append($tdTema);
@@ -55,17 +68,14 @@ var crearTema = function (e) {
   });
 };
 
-var filtroBusqueda = function (e, temas) {
-  e.preventDefault();
+var filtroBusqueda = function (event) {
+  event.preventDefault();
   var criterioFiltro = $("#criterio-filtro").val().toLowerCase();
-  var temas = function () {
-    $.getJSON(api.url, function (temas) {
-      var temaFiltrado = temas.filter(function (tema){
-        console.log(tema.content.toLowerCase().indexOf(criterioFiltro)>=0);
+  var temasFiltrados = function () {
+    var temaFiltrado = temas.find(function (tema){
+       arregloDeTemas.content.toLowerCase().indexOf(criterioFiltro) >= 0;
       });
-    });
+    };
   };
-  temas();
-};
 
 $(document).ready(cargarPagina);
